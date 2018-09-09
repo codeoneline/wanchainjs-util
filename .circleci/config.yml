@@ -53,7 +53,7 @@ jobs:
       - run:
           name: Test
           command: npm run lint
-  test-lint:
+  test-browser:
     docker:
       - image: circleci/node:10
     steps:
