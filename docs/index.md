@@ -813,134 +813,134 @@ Returns **[Buffer][59]**
 
 [55]: #zeros
 
-[56]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L513-L519 "Source code on GitHub"
+[56]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L513-L519 "Source code on GitHub"
 
 [57]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
-[58]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L559-L569 "Source code on GitHub"
+[58]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L559-L569 "Source code on GitHub"
 
 [59]: https://nodejs.org/api/buffer.html
 
 [60]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 
-[61]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L71-L71 "Source code on GitHub"
+[61]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L71-L71 "Source code on GitHub"
 
 [62]: https://github.com/indutny/bn.js
 
 [63]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
 
-[64]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L203-L206 "Source code on GitHub"
+[64]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L203-L206 "Source code on GitHub"
 
-[65]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L194-L196 "Source code on GitHub"
+[65]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L194-L196 "Source code on GitHub"
 
 [66]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
 
-[67]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L1006-L1016 "Source code on GitHub"
+[67]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L1006-L1016 "Source code on GitHub"
 
-[68]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L816-L822 "Source code on GitHub"
+[68]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L816-L822 "Source code on GitHub"
 
-[69]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L803-L809 "Source code on GitHub"
+[69]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L803-L809 "Source code on GitHub"
 
-[70]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L581-L674 "Source code on GitHub"
+[70]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L581-L674 "Source code on GitHub"
 
 [71]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[72]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L398-L406 "Source code on GitHub"
+[72]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L398-L406 "Source code on GitHub"
 
-[73]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L367-L375 "Source code on GitHub"
+[73]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L367-L375 "Source code on GitHub"
 
-[74]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L435-L454 "Source code on GitHub"
+[74]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L435-L454 "Source code on GitHub"
 
 [75]: https://github.com/ethereum/go-ethereum/issues/2053
 
-[76]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L213-L215 "Source code on GitHub"
+[76]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L213-L215 "Source code on GitHub"
 
-[77]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L482-L496 "Source code on GitHub"
+[77]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L482-L496 "Source code on GitHub"
 
-[78]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L869-L878 "Source code on GitHub"
+[78]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L869-L878 "Source code on GitHub"
 
-[79]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L385-L388 "Source code on GitHub"
+[79]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L385-L388 "Source code on GitHub"
 
-[80]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L353-L359 "Source code on GitHub"
+[80]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L353-L359 "Source code on GitHub"
 
-[81]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L503-L506 "Source code on GitHub"
+[81]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L503-L506 "Source code on GitHub"
 
 [82]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
-[83]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L1023-L1025 "Source code on GitHub"
+[83]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L1023-L1025 "Source code on GitHub"
 
-[84]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L1054-L1056 "Source code on GitHub"
+[84]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L1054-L1056 "Source code on GitHub"
 
-[85]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L296-L298 "Source code on GitHub"
+[85]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L296-L298 "Source code on GitHub"
 
-[86]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L307-L318 "Source code on GitHub"
+[86]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L307-L318 "Source code on GitHub"
 
-[87]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L232-L237 "Source code on GitHub"
+[87]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L232-L237 "Source code on GitHub"
 
-[88]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L244-L246 "Source code on GitHub"
+[88]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L244-L246 "Source code on GitHub"
 
-[89]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L461-L463 "Source code on GitHub"
+[89]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L461-L463 "Source code on GitHub"
 
-[90]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L930-L935 "Source code on GitHub"
+[90]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L930-L935 "Source code on GitHub"
 
-[91]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L327-L335 "Source code on GitHub"
+[91]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L327-L335 "Source code on GitHub"
 
-[92]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L856-L862 "Source code on GitHub"
+[92]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L856-L862 "Source code on GitHub"
 
-[93]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L844-L849 "Source code on GitHub"
+[93]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L844-L849 "Source code on GitHub"
 
-[94]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L272-L280 "Source code on GitHub"
+[94]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L272-L280 "Source code on GitHub"
 
-[95]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L77-L77 "Source code on GitHub"
+[95]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L77-L77 "Source code on GitHub"
 
 [96]: https://github.com/ethereumjs/rlp
 
-[97]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L287-L289 "Source code on GitHub"
+[97]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L287-L289 "Source code on GitHub"
 
-[98]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L83-L83 "Source code on GitHub"
+[98]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L83-L83 "Source code on GitHub"
 
 [99]: https://github.com/cryptocoinjs/secp256k1-node/
 
-[100]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L140-L142 "Source code on GitHub"
+[100]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L140-L142 "Source code on GitHub"
 
-[101]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L261-L264 "Source code on GitHub"
+[101]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L261-L264 "Source code on GitHub"
 
-[102]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L254-L254 "Source code on GitHub"
+[102]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L254-L254 "Source code on GitHub"
 
-[103]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L162-L186 "Source code on GitHub"
+[103]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L162-L186 "Source code on GitHub"
 
-[104]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L1033-L1047 "Source code on GitHub"
+[104]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L1033-L1047 "Source code on GitHub"
 
-[105]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L415-L427 "Source code on GitHub"
+[105]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L415-L427 "Source code on GitHub"
 
-[106]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L222-L224 "Source code on GitHub"
+[106]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L222-L224 "Source code on GitHub"
 
-[107]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L149-L157 "Source code on GitHub"
+[107]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L149-L157 "Source code on GitHub"
 
-[108]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L531-L552 "Source code on GitHub"
+[108]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L531-L552 "Source code on GitHub"
 
-[109]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L471-L474 "Source code on GitHub"
+[109]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L471-L474 "Source code on GitHub"
 
-[110]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L36-L36 "Source code on GitHub"
+[110]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L36-L36 "Source code on GitHub"
 
-[111]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L29-L29 "Source code on GitHub"
+[111]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L29-L29 "Source code on GitHub"
 
-[112]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L64-L64 "Source code on GitHub"
+[112]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L64-L64 "Source code on GitHub"
 
-[113]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L50-L50 "Source code on GitHub"
+[113]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L50-L50 "Source code on GitHub"
 
-[114]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L43-L43 "Source code on GitHub"
+[114]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L43-L43 "Source code on GitHub"
 
-[115]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L57-L57 "Source code on GitHub"
+[115]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L57-L57 "Source code on GitHub"
 
-[116]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L115-L131 "Source code on GitHub"
+[116]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L115-L131 "Source code on GitHub"
 
-[117]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L17-L17 "Source code on GitHub"
+[117]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L17-L17 "Source code on GitHub"
 
-[118]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L342-L346 "Source code on GitHub"
+[118]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L342-L346 "Source code on GitHub"
 
-[119]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L23-L23 "Source code on GitHub"
+[119]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L23-L23 "Source code on GitHub"
 
-[120]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L100-L104 "Source code on GitHub"
+[120]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L100-L104 "Source code on GitHub"
 
-[121]: https://github.com/WanJS/wanchainjs-util/blob/19d2b1f8496da2714becf3ad8a2913a618604b47/index.js#L91-L93 "Source code on GitHub"
+[121]: https://github.com/WanJS/wanchainjs-util/blob/7e04e8464425720e824d8130cfd2ac772f909900/index.js#L91-L93 "Source code on GitHub"
