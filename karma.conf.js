@@ -2,10 +2,10 @@ module.exports = function (config) {
   config.set({
     frameworks: ['browserify', 'detectBrowsers', 'mocha'],
     files: [
-      'test/*.js'
+      'test/*.js',
     ],
     preprocessors: {
-      'test/*.js': ['browserify', 'env']
+      'test/*.js': ['browserify', 'env'],
     },
     singleRun: true,
     plugins: [
@@ -14,7 +14,7 @@ module.exports = function (config) {
       'karma-env-preprocessor',
       'karma-firefox-launcher',
       'karma-detect-browsers',
-      'karma-mocha'
+      'karma-mocha',
     ],
     browserify: {
       'transform': [
@@ -22,16 +22,16 @@ module.exports = function (config) {
           'babelify',
           {
             'presets': [
-              'env'
-            ]
-          }
-        ]
+              'env',
+            ],
+          },
+        ],
       ],
-      debug: true
+      debug: true,
     },
     envPreprocessor: [
       'RANDOM_TESTS_REPEAT',
-      'TRAVIS'
+      'TRAVIS',
     ],
     detectBrowsers: {
       enabled: true,
@@ -45,7 +45,7 @@ module.exports = function (config) {
         return browsers.filter(function (browser) {
           return availableBrowser.indexOf(browser) !== -1
         })
-      }
-    }
+      },
+    },
   })
 }

@@ -562,7 +562,7 @@ var checksumAddresses = [
   '0xdd325b343887Ab6517a517f29e92cb23B9f12de7',
   '0xc8139F4a4b444e20c93aA857f6316b7935Aa24CB',
   '0xC1eCb653F222Fd5697A764AC38C45F87b37F63e6',
-  '0x918656Dd12C6Cddc28083D236996cdB06f161Fbf'
+  '0x918656Dd12C6Cddc28083D236996cdB06f161Fbf',
 ]
 
 describe('.toChecksumAddress()', function () {
@@ -607,12 +607,12 @@ describe('message sig', function () {
     assert.deepEqual(ethUtils.fromRpcSig('0x99e71a99cb2270b8cac5254f9e99b6210c6c10224a1579cf389ef88b20a1abe9129ff05af364204442bdb53ab6f18a99ab48acc9326fa689f228040429e3ca661b'), {
       v: 27,
       r: r,
-      s: s
+      s: s,
     })
     assert.deepEqual(ethUtils.fromRpcSig('0x99e71a99cb2270b8cac5254f9e99b6210c6c10224a1579cf389ef88b20a1abe9129ff05af364204442bdb53ab6f18a99ab48acc9326fa689f228040429e3ca6600'), {
       v: 27,
       r: r,
-      s: s
+      s: s,
     })
   })
 
