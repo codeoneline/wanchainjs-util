@@ -1,19 +1,27 @@
-# SYNOPSIS
-[![NPM Package](https://img.shields.io/npm/v/ethereumjs-util.svg?style=flat-square)](https://www.npmjs.org/package/ethereumjs-util)
-[![Build Status](https://img.shields.io/travis/ethereumjs/ethereumjs-util.svg?branch=master&style=flat-square)](https://travis-ci.org/ethereumjs/ethereumjs-util)
-[![Coverage Status](https://img.shields.io/coveralls/ethereumjs/ethereumjs-util.svg?style=flat-square)](https://coveralls.io/r/ethereumjs/ethereumjs-util)
-[![Gitter](https://img.shields.io/gitter/room/ethereum/ethereumjs-lib.svg?style=flat-square)](https://gitter.im/ethereum/ethereumjs-lib) or #ethereumjs on freenode  
+# Wanchain JS Util
 
-[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)  
+[![CircleCI][circle-image]][circle-url]
+[![Coverage Status][coveralls-image]][coveralls-url]
+[![dependency status][dep-image]][dep-url]
+[![NPM][npm-image]][npm-url]
 
-
-
-A collection of utility functions for ethereum. It can be used in node.js or can be in the browser with browserify.
+A collection of utility functions for wanchain. It can be used in node.js or can be in the browser with browserify.
 
 # API
 [./docs/](./docs/index.md)
 
-Most of the string manipulation methods are provided by [ethjs-util](https://github.com/ethjs/ethjs-util)
+Most of the string manipulation methods are provided by [wanjs-util](https://github.com/WanJS/Wanjs-util)
 
 # LICENSE
 MPL-2.0
+
+Original work [ethereumjs-util](https://github.com/ethereumjs/ethereumjs-util)
+
+[circle-image]: https://circleci.com/gh/WanJS/wanchainjs-util.svg?style=svg
+[circle-url]: https://circleci.com/gh/WanJS/wanchainjs-util
+[dep-image]: https://david-dm.org/WanJS/wanchainjs-util.svg
+[dep-url]: https://david-dm.org/WanJS/wanchainjs-util
+[coveralls-image]: https://coveralls.io/repos/github/WanJS/wanchainjs-util/badge.svg?branch=dev
+[coveralls-url]: https://coveralls.io/github/WanJS/wanchainjs-util?branch=dev
+[npm-image]: http://img.shields.io/npm/v/wanchainjs-util.svg
+[npm-url]: https://www.npmjs.org/package/wanchainjs-util
