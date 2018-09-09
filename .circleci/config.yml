@@ -11,10 +11,14 @@ workflows:
       - test-unit:
           requires:
             - prep-deps-npm
+      - test-browser:
+          requires:
+            - prep-deps-npm
       - all-tests-pass:
           requires:
             - test-lint
             - test-unit
+            - test-browser
       - job-publish-release:
           filters:
             branches:
@@ -49,6 +53,16 @@ jobs:
       - run:
           name: Test
           command: npm run lint
+  test-lint:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run:
+          name: Test
+          command: npm run test:browser
   test-unit:
     docker:
       - image: circleci/node:10
