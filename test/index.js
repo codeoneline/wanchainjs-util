@@ -552,17 +552,17 @@ describe('isValidSignature', function () {
 })
 
 var checksumAddresses = [
-  // All caps
-  '0x52908400098527886E0F7030069857D2E4169EE7',
-  '0x8617E340B3D01FA5F11F306F4090FD50E238070D',
-  // All Lower
-  '0xde709f2102306220921060314715629080e2fb77',
-  '0x27b1fdb04752bbc536007a920d24acb045561c26',
-  // Normal
-  '0x5aAeb6053F3E94C9b9A09f33669435E7Ef1BeAed',
-  '0xfB6916095ca1df60bB79Ce92cE3Ea74c37c5d359',
-  '0xdbF03B407c01E7cD3CBea99509d93f8DDDC8C6FB',
-  '0xD1220A0cf47c7B9Be7A2E6BA89F429762e7b9aDb'
+  '0x6CAfc374c496cdB2bB865288E4aA1e86EE9bf534',
+  '0x641aCb18016A60C78f322fc61003eb399954067B',
+  '0xaBeB78B850B6CFFc685Df6c10EfC503f5EaC2f3a',
+  '0x51c3f7D52256048086ec41658671b29dbD41Fab3',
+  '0xe43a96E9d52bF57162Ed3b30c1DC7c41C04E1948',
+  '0x54DE1CA4747579e1833975cF054eAF8D9B0de99d',
+  '0x6358F1654f00eA317A7e0ed6C80E4bae4539e122',
+  '0xdd325b343887Ab6517a517f29e92cb23B9f12de7',
+  '0xc8139F4a4b444e20c93aA857f6316b7935Aa24CB',
+  '0xC1eCb653F222Fd5697A764AC38C45F87b37F63e6',
+  '0x918656Dd12C6Cddc28083D236996cdB06f161Fbf',
 ]
 
 describe('.toChecksumAddress()', function () {
@@ -587,14 +587,13 @@ describe('.isValidChecksumAddress()', function () {
 
 describe('.isValidAddress()', function () {
   it('should return true', function () {
-    assert.equal(ethUtils.isValidAddress('0x2f015c60e0be116b1f0cd534704db9c92118fb6a'), true)
-    assert.equal(ethUtils.isValidAddress('0x52908400098527886E0F7030069857D2E4169EE7'), true)
+    assert.equal(ethUtils.isValidAddress('0x641aCb18016A60C78f322fc61003eb399954067B'), true)
+    assert.equal(ethUtils.isValidAddress('0x918656Dd12C6Cddc28083D236996cdB06f161Fbf'), true)
   })
   it('should return false', function () {
     assert.equal(ethUtils.isValidAddress('2f015c60e0be116b1f0cd534704db9c92118fb6a'), false)
     assert.equal(ethUtils.isValidAddress('0x2f015c60e0be116b1f0cd534704db9c92118fb6'), false)
     assert.equal(ethUtils.isValidAddress('0x2f015c60e0be116b1f0cd534704db9c92118fb6aa'), false)
-    assert.equal(ethUtils.isValidAddress('0X52908400098527886E0F7030069857D2E4169EE7'), false)
     assert.equal(ethUtils.isValidAddress('x2f015c60e0be116b1f0cd534704db9c92118fb6a'), false)
   })
 })
@@ -608,12 +607,12 @@ describe('message sig', function () {
     assert.deepEqual(ethUtils.fromRpcSig('0x99e71a99cb2270b8cac5254f9e99b6210c6c10224a1579cf389ef88b20a1abe9129ff05af364204442bdb53ab6f18a99ab48acc9326fa689f228040429e3ca661b'), {
       v: 27,
       r: r,
-      s: s
+      s: s,
     })
     assert.deepEqual(ethUtils.fromRpcSig('0x99e71a99cb2270b8cac5254f9e99b6210c6c10224a1579cf389ef88b20a1abe9129ff05af364204442bdb53ab6f18a99ab48acc9326fa689f228040429e3ca6600'), {
       v: 27,
       r: r,
-      s: s
+      s: s,
     })
   })
 

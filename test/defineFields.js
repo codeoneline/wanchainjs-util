@@ -6,24 +6,24 @@ describe('define', function () {
     name: 'aword',
     alias: 'blah',
     word: true,
-    default: Buffer.allocUnsafe(0)
+    default: Buffer.allocUnsafe(0),
   }, {
     name: 'empty',
     allowZero: true,
     length: 20,
-    default: Buffer.allocUnsafe(0)
+    default: Buffer.allocUnsafe(0),
   }, {
     name: 'cannotBeZero',
     allowZero: false,
-    default: Buffer.from([0])
+    default: Buffer.from([0]),
   }, {
     name: 'value',
-    default: Buffer.allocUnsafe(0)
+    default: Buffer.allocUnsafe(0),
   }, {
     name: 'r',
     length: 32,
     allowLess: true,
-    default: ethUtil.zeros(32)
+    default: ethUtil.zeros(32),
   }]
 
   it('should trim zeros', function () {
@@ -46,7 +46,7 @@ describe('define', function () {
         name: 'mustBeExactSize',
         allowZero: false,
         length: 20,
-        default: Buffer.from([1, 2, 3, 4])
+        default: Buffer.from([1, 2, 3, 4]),
       }]
       ethUtil.defineProperties(someOb, tmp)
     })
@@ -58,7 +58,7 @@ describe('define', function () {
       aword: 'test',
       cannotBeZero: 'not zero',
       value: 'a value',
-      r: 'rrr'
+      r: 'rrr',
     }
 
     var expected = {
@@ -66,11 +66,11 @@ describe('define', function () {
       empty: '0x',
       cannotBeZero: '0x6e6f74207a65726f',
       value: '0x612076616c7565',
-      r: '0x727272'
+      r: '0x727272',
     }
 
     var expectedArray = [
-      '0x74657374', '0x', '0x6e6f74207a65726f', '0x612076616c7565', '0x727272'
+      '0x74657374', '0x', '0x6e6f74207a65726f', '0x612076616c7565', '0x727272',
     ]
 
     ethUtil.defineProperties(someOb, fields, data)
@@ -103,7 +103,7 @@ describe('define', function () {
       aword: 'test',
       cannotBeZero: 'not zero',
       value: 'a value',
-      r: 'rrr'
+      r: 'rrr',
     }
 
     ethUtil.defineProperties(someOb, fields, data)

@@ -7,6 +7,9 @@ const createHash = require('create-hash')
 const Buffer = require('safe-buffer').Buffer
 Object.assign(exports, require('ethjs-util'))
 
+const SECP256K1_N = new BN('fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141', 16)
+const SECP256K1_N_DIV_2 = new BN('7fffffffffffffffffffffffffffffff5d576e7357a4501ddfe92f46681b20a0', 16)
+
 /**
  * the max integer that this VM can handle (a ```BN```)
  * @var {BN} MAX_INTEGER
@@ -419,7 +422,7 @@ exports.toRpcSig = function (v, r, s) {
   return exports.bufferToHex(Buffer.concat([
     exports.setLengthLeft(r, 32),
     exports.setLengthLeft(s, 32),
-    exports.toBuffer(v)
+    exports.toBuffer(v),
   ]))
 }
 
@@ -446,7 +449,7 @@ exports.fromRpcSig = function (sig) {
   return {
     v: v,
     r: sig.slice(0, 32),
-    s: sig.slice(32, 64)
+    s: sig.slice(32, 64),
   }
 }
 
@@ -460,15 +463,6 @@ exports.privateToAddress = function (privateKey) {
 }
 
 /**
- * Checks if the address is a valid. Accepts checksummed addresses too
- * @param {String} address
- * @return {Boolean}
- */
-exports.isValidAddress = function (address) {
-  return /^0x[0-9a-fA-F]{40}$/.test(address)
-}
-
-/**
   * Checks if a given address is a zero address
   * @method isZeroAddress
   * @param {String} address
@@ -477,36 +471,6 @@ exports.isValidAddress = function (address) {
 exports.isZeroAddress = function (address) {
   const zeroAddress = exports.zeroAddress()
   return zeroAddress === exports.addHexPrefix(address)
-}
-
-/**
- * Returns a checksummed address
- * @param {String} address
- * @return {String}
- */
-exports.toChecksumAddress = function (address) {
-  address = exports.stripHexPrefix(address).toLowerCase()
-  const hash = exports.keccak(address).toString('hex')
-  let ret = '0x'
-
-  for (let i = 0; i < address.length; i++) {
-    if (parseInt(hash[i], 16) >= 8) {
-      ret += address[i].toUpperCase()
-    } else {
-      ret += address[i]
-    }
-  }
-
-  return ret
-}
-
-/**
- * Checks if the address is a valid checksummed address
- * @param {Buffer} address
- * @return {Boolean}
- */
-exports.isValidChecksumAddress = function (address) {
-  return exports.isValidAddress(address) && (exports.toChecksumAddress(address) === address)
 }
 
 /**
@@ -565,9 +529,6 @@ exports.addHexPrefix = function (str) {
  */
 
 exports.isValidSignature = function (v, r, s, homestead) {
-  const SECP256K1_N_DIV_2 = new BN('7fffffffffffffffffffffffffffffff5d576e7357a4501ddfe92f46681b20a0', 16)
-  const SECP256K1_N = new BN('fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141', 16)
-
   if (r.length !== 32 || s.length !== 32) {
     return false
   }
@@ -663,7 +624,7 @@ exports.defineProperties = function (self, fields, data) {
       enumerable: true,
       configurable: true,
       get: getter,
-      set: setter
+      set: setter,
     })
 
     if (field.default) {
@@ -676,7 +637,7 @@ exports.defineProperties = function (self, fields, data) {
         enumerable: false,
         configurable: true,
         set: setter,
-        get: getter
+        get: getter,
       })
     }
   })
@@ -711,3 +672,391 @@ exports.defineProperties = function (self, fields, data) {
     }
   }
 }
+
+// x * hash(P)P
+exports.xScalarHashP = function (x, P) {
+  const hashPub = exports.sha3(P)
+  const iP = secp256k1.publicKeyTweakMul(P, hashPub)
+  const I = secp256k1.publicKeyTweakMul(iP, x)
+  return I
+}
+
+exports.waddressLength = 66 * 2
+exports.isValidWAddress = function (address) {
+  return /^0x[0-9a-fA-F]{132}$/i.test(address)
+}
+
+exports.toChecksumOTAddress = function (address) {
+  address = exports.stripHexPrefix(address).toLowerCase()
+  if (address.length !== exports.waddressLength) {
+    return ''
+  }
+  const abx = address.slice(2, 66) + address.slice(68)
+  let Cabx = ''
+  var hash = exports.sha3(address, 512).toString('hex')
+
+  for (var i = 0; i < abx.length; i++) {
+    if (parseInt(hash[i], 16) >= 8) {
+      Cabx += abx[i].toUpperCase()
+    } else {
+      Cabx += abx[i]
+    }
+  }
+
+  return '0x' + address.slice(0, 2) + Cabx.slice(0, 64) + address.slice(66, 68) + Cabx.slice(64)
+}
+
+exports.isValidChecksumOTAddress = function (address) {
+  return exports.isValidWAddress(address) && (exports.toChecksumOTAddress(address) === address)
+}
+exports.getDataForSendWanCoin = function (fromWaddr) {
+  if (!exports.isValidChecksumOTAddress(fromWaddr)) {
+    return ''
+  }
+  const Pubkey = exports.stripHexPrefix(fromWaddr).toLowerCase()
+  return '0x00' + Pubkey
+}
+exports.verifyRinSign = function (ringArgs) {
+  let sumC = new BN('0')
+  for (let i = 0; i < ringArgs.w.length; i++) {
+    sumC = sumC.add(new BN(ringArgs.w[i]))
+  }
+  sumC = sumC.umod(SECP256K1_N)
+  console.log('all  sum: ', sumC.toBuffer('be', 32).toString('hex'))
+  const h = createKeccakHash('keccak256')
+  h.update(ringArgs.m)
+  for (let i = 0; i < ringArgs.w.length; i++) {
+    let Li = secp256k1.publicKeyCreate(ringArgs.q[i], false)// [qi]G
+    const tP = secp256k1.publicKeyTweakMul(ringArgs.PubKeys[i], ringArgs.w[i])// [wi]Pi
+    Li = secp256k1.publicKeyCombine([Li, tP], false) // [qi]G + [wi]Pi
+    h.update(Li)
+  }
+  for (let i = 0; i < ringArgs.q.length; i++) {
+    const Ric = exports.xScalarHashP(ringArgs.q[i], ringArgs.PubKeys[i])
+    let Ri = secp256k1.publicKeyConvert(Ric, false)
+    const wiI = secp256k1.publicKeyTweakMul(ringArgs.I, ringArgs.w[i])
+    Ri = secp256k1.publicKeyCombine([Ri, wiI], false)
+    h.update(Ri)
+  }
+  const hash = h.digest()
+  console.log('all hash: ', hash.toString('hex'))
+  return hash.toString('hex') === sumC.toBuffer('be', 32).toString('hex')
+}
+exports.getRingSign = function (m, otaSk, otaPubK, ringPubKs) {
+  const rklen = ringPubKs.length
+  const s = Math.floor(Math.random() * (rklen + 1))
+  ringPubKs.splice(s, 0, otaPubK)
+
+  const Ic = exports.xScalarHashP(otaSk, otaPubK) // otaSk * hash(otaPubK)otaPubK
+  const I = secp256k1.publicKeyConvert(Ic, false)
+  const q = []
+  const w = []
+  let sumC = new BN('0')
+  const h = createKeccakHash('keccak256')
+  h.update(m)
+  for (let i = 0; i < rklen + 1; i++) {
+    q.push(_generatePrivateKey())
+    w.push(_generatePrivateKey())
+    let Li = secp256k1.publicKeyCreate(q[i], false)// [qi]G
+    if (i !== s) {
+      const tP = secp256k1.publicKeyTweakMul(ringPubKs[i], w[i])// [wi]Pi
+      Li = secp256k1.publicKeyCombine([Li, tP], false) // [qi]G + [wi]Pi
+      sumC = sumC.add(new BN(w[i]))
+      sumC = sumC.umod(SECP256K1_N)
+    }
+    h.update(Li)
+  }
+  for (let i = 0; i < rklen + 1; i++) {
+    const Ric = exports.xScalarHashP(q[i], ringPubKs[i])
+    let Ri = secp256k1.publicKeyConvert(Ric, false)
+    if (i !== s) {
+      const wiI = secp256k1.publicKeyTweakMul(I, w[i])
+      Ri = secp256k1.publicKeyCombine([Ri, wiI], false)
+    }
+    h.update(Ri)
+  }
+  const cd = h.digest('hex')
+  const c = new BN(cd, 16).umod(SECP256K1_N)
+  const cs = c.sub(sumC).umod(SECP256K1_N)
+
+  const Qs = new BN(q[s])
+  const bnx = new BN(otaSk).umod(SECP256K1_N)
+  const csx = cs.mul(bnx).umod(SECP256K1_N)// ;
+  const rs = Qs.sub(csx).umod(SECP256K1_N)
+  w[s] = cs.toBuffer('be', 32)
+  q[s] = rs.toBuffer('be', 32)
+
+  return {
+    q: q,
+    w: w,
+    PubKeys: ringPubKs,
+    I: I,
+    m: m,
+  }
+}
+
+/**
+ * convert waddress to raw
+ * @param {String} fromWaddr
+ * @return {Buffer}
+ */
+exports.convertWaddrtoRaw = function (fromWaddr) {
+  const address = exports.stripHexPrefix(fromWaddr).toLowerCase()
+  const pubKeyA = secp256k1.publicKeyConvert(new Buffer(address.slice(0, 66), 'hex'), false)
+  const pubKeyB = secp256k1.publicKeyConvert(new Buffer(address.slice(66), 'hex'), false)
+  const PubKey = secp256k1.publicKeyConvert(pubKeyA, false).toString('hex').slice(2) + secp256k1.publicKeyConvert(pubKeyB, false).toString('hex').slice(2)
+  return PubKey
+}
+
+/**
+ * convert buffer to waddress
+ * @param {Buffer} fromRawaddr
+ * @return {String}
+ */
+exports.convertRawtoWaddr = function (fromRawaddr) {
+  const addr = exports.recoverPubkeyFromRaw(fromRawaddr)
+  const pubKeyA = addr.A
+  const pubKeyB = addr.B
+  const PubKey = secp256k1.publicKeyConvert(pubKeyA, true).toString('hex') + secp256k1.publicKeyConvert(pubKeyB, true).toString('hex')
+  return exports.toChecksumOTAddress(PubKey)
+}
+exports.generateWaddrFromPriv = function (privA, privB) {
+  const pubkeyA = secp256k1.publicKeyCreate(privA, true)
+  const pubkeyB = secp256k1.publicKeyCreate(privB, true)
+  return exports.convertPubKeytoWaddr(pubkeyA, pubkeyB)
+}
+exports.convertPubKeytoWaddr = function (pubKeyA, pubKeyB) {
+  const PubKey = secp256k1.publicKeyConvert(pubKeyA, true).toString('hex') + secp256k1.publicKeyConvert(pubKeyB, true).toString('hex')
+  return exports.toChecksumOTAddress(PubKey)
+}
+exports.generateA1 = function (RPrivateKeyDBytes, pubKeyA, pubKeyB) {
+  let A1 = secp256k1.publicKeyTweakMul(pubKeyB, RPrivateKeyDBytes, false)
+  const A1Bytes = exports.sha3(A1)
+  A1 = secp256k1.publicKeyTweakAdd(pubKeyA, A1Bytes, false)
+  return A1
+}
+
+/**
+ * Recover public key from waddress
+ * @param {String} fromWaddr
+ * @return {Object}
+ */
+exports.recoverPubkeyFromWaddress = function (fromWaddr) {
+  const address = exports.stripHexPrefix(fromWaddr).toLowerCase()
+  const pubKeyA = secp256k1.publicKeyConvert(new Buffer(address.slice(0, 66), 'hex'), false)
+  const pubKeyB = secp256k1.publicKeyConvert(new Buffer(address.slice(66), 'hex'), false)
+  return {A: pubKeyA, B: pubKeyB}
+}
+
+/**
+ * convert public key from buffer
+ * @param {Buffer} fromRaw
+ * @return {String}
+ */
+exports.recoverPubkeyFromRaw = function (fromRaw) {
+  const rawA = '04' + fromRaw.slice(0, 128)
+  const rawB = '04' + fromRaw.slice(128)
+  const pubKeyA = secp256k1.publicKeyConvert(new Buffer(rawA, 'hex'), false)
+  const pubKeyB = secp256k1.publicKeyConvert(new Buffer(rawB, 'hex'), false)
+  return {A: pubKeyA, B: pubKeyB}
+}
+
+/**
+ * Generate OTA Waddress from Waddress
+ * @param {String} fromWaddr
+ * @return {String}
+ */
+exports.generateOTAWaddress = function (fromWaddr) {
+  const PubKey = exports.recoverPubkeyFromWaddress(fromWaddr)
+  const pubKeyA = PubKey.A
+  const pubKeyB = PubKey.B
+  const RPrivateKey = _generatePrivateKey()
+  const A1 = exports.generateA1(RPrivateKey, pubKeyA, pubKeyB)
+  const S1 = secp256k1.publicKeyCreate(new Buffer(RPrivateKey, 'hex'), false)
+  const OTAPubKey = secp256k1.publicKeyConvert(A1, true).toString('hex') + secp256k1.publicKeyConvert(S1, true).toString('hex')
+  return exports.toChecksumOTAddress(OTAPubKey)
+}
+
+
+exports.otaHash = function () {
+  var item
+  if (arguments.length < 1) {
+    throw Error('invalid parameters')
+  }
+  var buf = new Buffer([])
+  for (var i = 0; i < arguments.length; i++) {
+    item = exports.toBuffer(arguments[i])
+    buf = Buffer.concat([buf, item])
+  }
+  return exports.sha3(buf)
+}
+
+// strstrPrivateKey shouldn't have 0x prefix
+exports.otaSign = function (hashSrc, strPrivateKey) {
+  var privateKey = new Buffer(strPrivateKey, 'hex')
+  return exports.ecsign(hashSrc, privateKey)
+}
+
+
+exports.ascii_to_hexa = function (str) {
+  var arr1 = []
+  for (var n = 0, l = str.length; n < l; n++) {
+    var hex = Number(str.charCodeAt(n)).toString(16)
+    arr1.push(hex)
+  }
+  return arr1.join('')
+}
+
+// convert number to bytes32 for compatible with contract evm hash implements
+// TODO: validate input
+exports.numberToBytes32 = function (input) {
+  if (!input) {
+    return ''
+  }
+  var inputStr = input.toString()
+  var a2hStr = exports.ascii_to_hexa(inputStr)
+  var padding = ''
+  for (var i = 0; i < 64 - a2hStr.length; i++) {
+    padding += '0'
+  }
+  return '0x' + a2hStr + padding
+}
+
+/**
+ * get public key string from private key string
+ * @param private key string
+ * @return {String|null}
+ */
+exports.publicKeyFromPrivateKey = function (privateKey) {
+  if (!privateKey.startsWith('0x')) {
+    privateKey = '0x' + privateKey
+  }
+  return exports.bufferToHex(exports.privateToPublic(privateKey), 'hex')
+}
+
+function _generatePrivateKey () {
+  var randomBuf = crypto.randomBytes(32)
+  if (secp256k1.privateKeyVerify(randomBuf)) {
+    return randomBuf
+  } else {
+    return _generatePrivateKey()
+  }
+}
+
+function _generateA1 (RPrivateKeyDBytes, pubKeyA, pubKeyB) {
+  var A1 = secp256k1.publicKeyTweakMul(pubKeyA, RPrivateKeyDBytes, false)
+  var A1Bytes = exports.sha3(A1)
+  A1 = secp256k1.publicKeyTweakAdd(pubKeyB, A1Bytes, false)
+  return A1
+}
+
+function _generateOTAPublicKey (pubKeyA, pubKeyB) {
+  var RPrivateKey = _generatePrivateKey()
+  var A1 = _generateA1(RPrivateKey, pubKeyA, pubKeyB)
+  return {
+    OtaA1: exports.bufferToHex(A1).slice(4),
+    OtaS1: exports.bufferToHex(exports.privateToPublic(RPrivateKey)).slice(2),
+  }
+}
+
+// input is 128 or 130 byte
+function _utilPubkey2SecpFormat (utilPubKeyStr) {
+  if (utilPubKeyStr.startsWith('0x')) {
+    utilPubKeyStr = utilPubKeyStr.slice(2)
+  }
+  utilPubKeyStr = '04' + utilPubKeyStr
+  return secp256k1.publicKeyConvert(new Buffer(utilPubKeyStr, 'hex'))
+}
+
+exports.pubkeyStrCompressed = function (pubStr) {
+  var buf = _utilPubkey2SecpFormat(pubStr)
+  return exports.bufferToHex(buf)
+}
+
+exports.generateOTAPublicKey = function (A, B) {
+  var pubKeyA = _utilPubkey2SecpFormat(A)
+  var pubKeyB = _utilPubkey2SecpFormat(B)
+  return _generateOTAPublicKey(pubKeyA, pubKeyB)
+}
+
+function _privateKeyStr2Buf (s) {
+  if (s.startsWith('0x')) {
+    s = s.slice(2)
+  }
+  return new Buffer(s, 'hex')
+}
+
+exports.computeOTAPrivateKey = function (A, S, a, b) {
+  var otaPubS1 = _utilPubkey2SecpFormat(S)
+  var privatekeyA = _privateKeyStr2Buf(a)
+  var privatekeyB = _privateKeyStr2Buf(b)
+  var pub = secp256k1.publicKeyTweakMul(otaPubS1, privatekeyB, false)
+  var k = exports.sha3(pub)
+  k = secp256k1.privateKeyTweakAdd(k, privatekeyA)
+  return k
+}
+
+/**
+ * Checks if the address is a valid. Accepts checksummed addresses too
+ * @param {Buffer} waddr
+ * @param {Buffer} bufa
+ * @param {Buffer} bufb
+ * @return {Buffer}
+ */
+exports.computeWaddrPrivateKey = function (waddr, bufa, bufb) {
+  /*
+  otaPubS1 is secpFormat
+  bufa, bufb is privatekey Buffer.
+   */
+  const ota = exports.recoverPubkeyFromWaddress(waddr)
+  var pub = secp256k1.publicKeyTweakMul(ota.B, bufb, false)
+  var k = exports.sha3(pub)
+  k = secp256k1.privateKeyTweakAdd(k, bufa)
+  return k
+}
+
+/**
+ * Checks if the address is a valid. Accepts checksummed addresses too
+ * @param {String} address
+ * @return {Boolean}
+ */
+exports.isValidAddress = function (address) {
+  return /^0x[0-9a-fA-F]{40}$/i.test(address)
+}
+
+/**
+ * Returns a checksummed address
+ * @param {String} address
+ * @return {String}
+ */
+
+exports.toChecksumAddress = function (address) {
+  address = exports.stripHexPrefix(address).toLowerCase()
+  var hash = exports.sha3(address).toString('hex')
+  var ret = '0x'
+
+  for (var i = 0; i < address.length; i++) {
+    if (parseInt(hash[i], 16) < 8) {
+      ret += address[i].toUpperCase()
+    } else {
+      ret += address[i]
+    }
+  }
+
+  return ret
+}
+
+/**
+ * Checks if the address is a valid checksummed address
+ * @param {Buffer} address
+ * @return {Boolean}
+ */
+exports.isValidChecksumAddress = function (address) {
+  return exports.isValidAddress(address) && (exports.toChecksumAddress(address) === address)
+}
+
+exports.coinSCAbi = [{'constant': false, 'type': 'function', 'stateMutability': 'nonpayable', 'inputs': [{'name': 'OtaAddr', 'type': 'string'}, {'name': 'Value', 'type': 'uint256'}], 'name': 'buyCoinNote', 'outputs': [{'name': 'OtaAddr', 'type': 'string'}, {'name': 'Value', 'type': 'uint256'}]}, {'constant': false, 'type': 'function', 'inputs': [{'name': 'RingSignedData', 'type': 'string'}, {'name': 'Value', 'type': 'uint256'}], 'name': 'refundCoin', 'outputs': [{'name': 'RingSignedData', 'type': 'string'}, {'name': 'Value', 'type': 'uint256'}]}, {'constant': false, 'inputs': [], 'name': 'getCoins', 'outputs': [{'name': 'Value', 'type': 'uint256'}]}]
+exports.stampSCAbi = [{'constant': false, 'type': 'function', 'stateMutability': 'nonpayable', 'inputs': [{'name': 'OtaAddr', 'type': 'string'}, {'name': 'Value', 'type': 'uint256'}], 'name': 'buyStamp', 'outputs': [{'name': 'OtaAddr', 'type': 'string'}, {'name': 'Value', 'type': 'uint256'}]}, {'constant': false, 'type': 'function', 'inputs': [{'name': 'RingSignedData', 'type': 'string'}, {'name': 'Value', 'type': 'uint256'}], 'name': 'refundCoin', 'outputs': [{'name': 'RingSignedData', 'type': 'string'}, {'name': 'Value', 'type': 'uint256'}]}, {'constant': false, 'type': 'function', 'stateMutability': 'nonpayable', 'inputs': [], 'name': 'getCoins', 'outputs': [{'name': 'Value', 'type': 'uint256'}]}]
+
+exports.contractCoinAddress = '0x0000000000000000000000000000000000000064'
+exports.contractStampAddress = '0x00000000000000000000000000000000000000c8'
